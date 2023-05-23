@@ -1,0 +1,79 @@
+{% extends 'template.html' %}
+
+
+{% block main %}
+<div class="container ">
+   <h3 class="text-center" style="padding:35px;color:rgb(255, 255, 255); font-size:35px;">PASSWORD RECOMMENDER</h3>
+
+<form style="color:rgb(255, 255, 255)"  class="mx-5 px-4" method="POST">
+   
+  <div class="form-group my-4 ">
+    <label for="passwordlength"> Password length</label>
+    <input type="number" class="form-control" id="passwordlength" aria-describedby="numberHelp" placeholder="Enter password length" min="8" max="30" required name="passwordlength">
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="alphabetcount">Alphabet Count</label>
+    <input type="number" class="form-control" id="alphabetcount" aria-describedby="numberHelp" placeholder="Enter alphabets count in password" min="0" max="10" required name="alphabetcount">
+   <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="digitcount">Digit Count</label>
+    <input type="number" class="form-control" id="digitcount" aria-describedby="numberHelp" placeholder="Enter digits count in password" min="0" max="10" required name="digitcount">
+    
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="specialcharcount">Special Character count</label>
+    <input type="number" class="form-control" id="specialcharcount" aria-describedby="numberHelp" placeholder="Enter special characters count in password" min="0" max="10" required name="specialcharcount">
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+  
+ 
+  <button  type="submit" class="btn btn-danger btn-lg btn-block text-center my-5 ">Submit</button>
+</form>
+</div>
+
+
+<div class="container " >
+
+{% if (data == 0) %}
+<div class="card text-white bg-danger " style="font-size: 20px;">
+  <div class="card-header">ERROR</div>
+  <div class="card-body">
+    
+    <p class="card-text">Characters total count is greater than the password length,enter correct parameter.</p>
+  </div>
+</div>
+</div>
+
+
+
+
+{% else %}
+
+  <h3 class="text-center" style="padding:35px;color:rgb(255, 255, 255); font-size:55px;">Generated Password</h3>
+
+<div class="row "  >
+  {% for item in passwordlist%}
+<div class="col  my-3 "   >
+  <div >
+    <div class="card"  style="width: 21rem; ">
+      <div class="card-body">
+        {{item}}
+      </div>
+      <button  type="button" onclick="copyText({{item| list }})"
+     class="btn-clipboard btn-danger" title data-original-title="Copy to clipboard" aria-describedby="tooltip988709">Copy</button>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+
+{% endif %}
+</div>
+   
+
+{% endblock %}

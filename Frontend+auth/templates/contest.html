@@ -1,0 +1,42 @@
+{% extends 'template.html' %}
+
+
+{% block main %}
+    <div class="container" style="background-color:azure">
+        <h1>Event Details</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time (IST)</th>
+                    <th>End Time (IST)</th>
+                    <th>Duration</th>
+                    <th>Site</th>
+                    <th>In 24 Hours</th>
+                    <th>Status</th>
+                    <th>Event Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.start_time }}</td>
+                    <td>{{ event.end_time }}</td>
+                    <td>{{ event.duration}}</td>
+                    <td>{{ event.site }}</td>
+                    <td>{{ event.in_24_hours }}</td>
+                    <td>{{ event.status }}</td>
+                    <td><a href="{{ event.url }}">Event Link</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+{% endblock %}

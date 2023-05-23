@@ -1,0 +1,57 @@
+{% extends "template.html" %}
+
+{% block main %}
+	<div >
+        <!-- RESPONSIVE CLASSES -->
+      
+      <!--FOR FLASH MESSAGES-->
+      {% with messages = get_flashed_messages() %}
+		{% if messages %}
+		    <div style="color: white; background-color:rgb(201, 3, 3) ; padding:10px" class="notification is-danger ">
+		        {{ messages[0] }}
+		    </div>
+		{% endif %}
+		{% endwith %}
+
+	<!--FOR FLASH MESSAGES-->
+
+    <div class="container ">
+   <h3 class="text-center" style="padding:35px;color:rgb(255, 255, 255); font-size:35px;">LOGIN</h3>
+
+<form style="color:rgb(255, 255, 255)"  class="mx-5 px-4" method="POST">
+   
+  <div class="form-group my-4 ">
+    <label for="profile-email">Email</label>
+    <input type="email" class="form-control" name="email" placeholder="Email">
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="profile-name">Name</label>   
+     <input type="text" class="form-control" name="name" placeholder="User Name">
+   <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+ 
+
+   <div class="form-group my-4">
+    <label for="profile_password">Password</label>
+   <input type="password" class="form-control" name="password" id="profile-password">
+    
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+  <div class="form-group my-4">
+        <label for="profile_remember">Remember</label>
+   <input type="checkbox" name="remember" id="profile-password" value="True">
+    
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+  
+ 
+  <button  type="submit" class="btn btn-danger btn-lg btn-block text-center my-5 ">Submit</button>
+</form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+
+{% extends 'template.html' %}
+{% block main %}
+
+    <div  style="padding:35px;color:rgb(255, 255, 255);" class="container my-3">
+        <h2>Update Details</h2>
+    <form style="color:rgb(255, 255, 255)"  class="mx-5 px-4" method="POST">
+   
+  <div class="form-group my-4 ">
+    <label for="website"> Website </label>
+    <input type="url" class="form-control" id="website" aria-describedby="numberHelp" value="{{toupdate.website}}"  required name="website">
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" aria-describedby="numberHelp" value="{{toupdate.emailid}}"  required name="email">
+   <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" aria-describedby="numberHelp" value="{{toupdate.password}}"  required name="password">
+    
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+  
+ 
+  <button  type="submit" class="btn btn-danger btn-lg btn-block text-center my-5 ">Submit</button>
+</form>
+</div>
+   
+    
+
+{% endblock %}

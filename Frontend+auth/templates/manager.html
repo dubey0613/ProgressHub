@@ -1,0 +1,91 @@
+{% extends 'template.html' %} 
+
+{% block main %}
+ <div class="container ">
+  <h3 class="text-center" style="padding:35px;color:rgb(255, 255, 255); font-size:35px;">PASSWORD Manager</h3>
+
+<form style="color:rgb(255, 255, 255)"  class="mx-5 px-4" method="POST">
+
+  <div class="form-group my-4 ">
+    <label for="website"> Website </label>
+    <input type="url" class="form-control" id="website" aria-describedby="numberHelp" placeholder="Enter website url"  required name="website">
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" aria-describedby="numberHelp" placeholder="Enter email"  required name="email">
+   <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+   <div class="form-group my-4">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" aria-describedby="numberHelp" placeholder="Enter  password" required name="password">
+    
+    <small id="numberHelp" class="form-text text-muted"></small>
+  </div>
+
+  
+ 
+  <button  type="submit" class="btn btn-danger btn-lg btn-block text-center my-5 ">Submit</button>
+</form>
+</div>
+
+
+<div class="container " >
+
+{% if (value == 1) %}
+
+{% if (data|length==0)%}
+<div class="card text-white bg-danger " style="font-size: 20px;">
+  <div class="card-header">ERROR</div>
+  <div class="card-body">
+    
+    <p class="card-text">No data to display , plz add some.</p>
+  </div>
+</div>
+</div>
+
+
+
+
+{% else %}
+
+  <h3 class="text-center" style="padding:55px;color:rgb(255, 255, 255); font-size:55px;">Generated Password</h3>
+
+<div class="row "  >
+  {% for item in data%}
+<div class="col  my-2 "   >
+  <div >
+    <div class="card"  style="width: 5 rem; ">
+      <div class="card-body my-2">
+      <div class=" my-2">Website -- {{item.website}}</div>
+        <div class=" my-2">Email -- {{item.emailid}}</div>
+       <div style="display:none" class=" my-2 " id="mytemp{{item.sno}}" > 
+        Password -- {{item.password}}
+
+        
+      </div>
+      </div>
+        
+      <span class=" text-center my-1">
+        <button onclick=showpassword({{item.sno|string}}) type="button" class="btn btn-danger btn-sm ">Show password </button>
+      <button onclick="window.location.href='/update/{{item.sno}}'" type="button" class="btn btn-danger btn-sm ">Update</button>
+
+      <button onclick="window.location.href='/delete/{{item.sno}}'" type="button" class="btn btn-danger btn-sm mx-1">Delete</button>
+      </span>
+
+
+      <!-- <button  type="button" onclick="copyText({{item.website| list }})"
+     class="btn-clipboard btn-danger" title data-original-title="Copy to clipboard" aria-describedby="tooltip988709">Copy</button> -->
+    </div>
+  </div>
+</div>
+    {% endfor %}
+
+{% endif %}
+{% endif %}
+</div>
+
+
+{% endblock %}
