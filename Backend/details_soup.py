@@ -3,6 +3,8 @@ import re
 import grequests
 import requests
 import os
+import html5lib
+
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -86,6 +88,22 @@ class UserData:
                    'user_details': user_details_get()}
 
         return details
+    
+
+    def __github(self):
+        url = 'https://www.github.com/{}'.format(self.__username)
+        r=requests.get(url)
+        soup=BeautifulSoup(r.content,'html5lib')
+        # namediv=soup.find("h1" ,class_="vcard-names pl-2 pl-md-0")
+        # name=namediv.find_all('span')[0].getText()
+        # u_name=namediv.find_all('span')[1].getText()
+        statstab=soup.find(class_="flex-order-1 flex-md-order-none mt-2 mt-md-0")
+        elements=statstab.find(class_="mb-3")
+        # followers=elements.find_all('a')[0].find('span').getText().strip(' ')
+        # following=elements.find_all('a')[1].find('span').getText().strip(' ')
+        # totstars=elements.find_all('a')[2].find('span').getText().strip(' ')
+        # u_img=soup.find(class_="avatar avatar-user width-full border bg-white")['src']
+        # repo_num=soup.find(class_="UnderlineNav-body").find('span',class_="Counter").getText()
 
     def __codeforces(self):
         urls = {
@@ -290,20 +308,11 @@ class UserData:
         if platform == 'codeforces':
             return self.__codeforces()
 
-        if platform == 'spoj':
-            try:
-                return self.__spoj()
-            except AttributeError:
-                raise UsernameError('User not Found')
-
-        if platform == 'interviewbit':
-            return self.__interviewbit()
-
         if platform == 'leetcode':
             return self.__leetcode_v2()
-
-        if platform == 'atcoder':
-            return self.__atcoder()
+        
+        if platform == 'github':
+            return self.__github()
 
         raise PlatformError('Platform not Found')
 
