@@ -6,6 +6,9 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from flask import session,request
+import requests
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -68,10 +71,10 @@ def register():
         new_user = User(
             name=form.name.data,
             email=form.email.data,
-            codechef=form.codechef.data,
-            codeforces=form.codeforces.data,
-            leetcode=form.leetcode.data,
-            github=form.github.data
+            codechef=form.codechef_id.data,
+            codeforces=form.codeforces_id.data,
+            leetcode=form.leetcode_id.data,
+            github=form.github_id.data
         )
         new_user.set_password(form.password.data)
         db.session.add(new_user)
@@ -88,6 +91,8 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash('Logged in successfully.')
+            session['user'] = user.email 
+            print(session['user'])
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid email or password.')
@@ -98,12 +103,24 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
+
+
+@app.route('/contest', methods=['GET', 'POST'])
+def contest():
+            response = requests.get('https://kontests.net/api/v1/all')
+            if response.status_code == 200:
+                events = response.json()
+            else:
+                events = []  # Empty list if API request fails
+            return render_template('contest.html',events=events)
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash('Logged out successfully.')
     return redirect(url_for('home'))
+
 
 if __name__ == '__main__':
       with app.app_context():
