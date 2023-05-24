@@ -4,7 +4,7 @@ app=Flask(__name__)
  
 @app.route("/user_id")
 def fetch_apps():
-    response=requests.get('http://127.0.0.1:5000/api')
+    response=requests.get('http://127.0.0.1:5000/')
 
     if response.status_code == 200:
         apps =response.json()

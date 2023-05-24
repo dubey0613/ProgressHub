@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">User Data</h1>
+        <hr>
+
+        {% if combined_response.codechef %}
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">CodeChef</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Country Rank:</strong> {{ combined_response.codechef.country_rank }}</p>
+                <p><strong>Global Rank:</strong> {{ combined_response.codechef.global_rank }}</p>
+                <p><strong>Highest Rating:</strong> {{ combined_response.codechef.highest_rating }}</p>
+                <p><strong>Rating:</strong> {{ combined_response.codechef.rating }}</p>
+                <p><strong>Stars:</strong> {{ combined_response.codechef.stars }}</p>
+                <p><strong>Status:</strong> {{ combined_response.codechef.status }}</p>
+                <p><strong>Country:</strong> {{ combined_response.codechef.user_details.country }}</p>
+                <p><strong>Institution:</strong> {{ combined_response.codechef.user_details.institution }}</p>
+                <p><strong>Name:</strong> {{ combined_response.codechef.user_details.name }}</p>
+                <p><strong>Student/Professional:</strong> {{ combined_response.codechef.user_details['student/professional'] }}</p>
+                <p><strong>Username:</strong> {{ combined_response.codechef.user_details.username }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if combined_response.codeforces %}
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Codeforces</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Max Rank:</strong> {{ combined_response.codeforces['max rank'] }}</p>
+                <p><strong>Max Rating:</strong> {{ combined_response.codeforces['max rating'] }}</p>
+                <p><strong>Platform:</strong> {{ combined_response.codeforces.platform }}</p>
+                <p><strong>Rank:</strong> {{ combined_response.codeforces.rank }}</p>
+                <p><strong>Rating:</strong> {{ combined_response.codeforces.rating }}</p>
+                <p><strong>Status:</strong> {{ combined_response.codeforces.status }}</p>
+                <p><strong>Username:</strong> {{ combined_response.codeforces.username }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if combined_response.leetcode %}
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">LeetCode</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Acceptance Rate:</strong> {{ combined_response.leetcode.acceptance_rate }}</p>
+                <p><strong>Contribution Points:</strong> {{ combined_response.leetcode.contribution_points }}</p>
+                <p><strong>Contribution Problems:</strong> {{ combined_response.leetcode.contribution_problems }}</p>
+                <p><strong>Contribution Testcases:</strong> {{ combined_response.leetcode.contribution_testcases }}</p>
+                <p><strong>Easy Acceptance Rate:</strong> {{ combined_response.leetcode.easy_acceptance_rate }}</p>
+                <p><strong>Easy Problems Submitted:</strong> {{ combined_response.leetcode.easy_problems_submitted }}</p>
+                <p><strong>Easy Questions Solved:</strong> {{ combined_response.leetcode.easy_questions_solved }}</p>
+                <p><strong>Hard Acceptance Rate:</strong> {{ combined_response.leetcode.hard_acceptance_rate }}</p>
+                <p><strong>Hard Problems Submitted:</strong> {{ combined_response.leetcode.hard_problems_submitted }}</p>
+                <p><strong>Hard Questions Solved:</strong> {{ combined_response.leetcode.hard_questions_solved }}</p>
+                <p><strong>Medium Acceptance Rate:</strong> {{ combined_response.leetcode.medium_acceptance_rate }}</p>
+                <p><strong>Medium Problems Submitted:</strong> {{ combined_response.leetcode.medium_problems_submitted }}</p>
+                <p><strong>Medium Questions Solved:</strong> {{ combined_response.leetcode.medium_questions_solved }}</p>
+                <p><strong>Ranking:</strong> {{ combined_response.leetcode.ranking }}</p>
+                <p><strong>Reputation:</strong> {{ combined_response.leetcode.reputation }}</p>
+                <p><strong>Status:</strong> {{ combined_response.leetcode.status }}</p>
+                <p><strong>Total Easy Questions:</strong> {{ combined_response.leetcode.total_easy_questions }}</p>
+                <p><strong>Total Hard Questions:</strong> {{ combined_response.leetcode.total_hard_questions }}</p>
+                <p><strong>Total Medium Questions:</strong> {{ combined_response.leetcode.total_medium_questions }}</p>
+                <p><strong>Total Problems Solved:</strong> {{ combined_response.leetcode.total_problems_solved }}</p>
+                <p><strong>Total Problems Submitted:</strong> {{ combined_response.leetcode.total_problems_submitted }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

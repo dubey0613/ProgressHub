@@ -9,6 +9,8 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from flask import session,request
 import requests
 
+from flask import jsonify
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -122,7 +124,38 @@ def logout():
     return redirect(url_for('home'))
 
 
+@app.route("/user_id")
+def fetch_apps():
+    email=session['user']
+    user = User.query.filter_by(email=email).first()
+    leetcode=user.leetcode
+    codechef=user.codechef
+    codeforces=user.codeforces
+    print(leetcode)
+
+    response1 = requests.get(f'http://127.0.0.1:8000/api/leetcode/{leetcode}')
+    response2 = requests.get(f'http://127.0.0.1:8000/api/codechef/{codechef}')
+    # response3 = requests.get(f'http://127.0.0.1:8000/api/codeforces/{codeforces}')
+
+    combined_response = {}
+
+    if response1.status_code == 200:
+        combined_response['leetcode'] = response1.json()
+
+    if response2.status_code == 200:
+        combined_response['codechef'] = response2.json()
+
+
+    if combined_response:
+        return render_template("display.html",combined_response=combined_response)
+    else:
+        return jsonify({"Error": "Oops, sorry"})
+
+    
+
+
+
 if __name__ == '__main__':
       with app.app_context():
         db.create_all()
-        app.run()
+        app.run(port=7000)
